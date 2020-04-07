@@ -75,11 +75,19 @@ function populate(n)
 }
 
 function main(){
-    var disks = process.argv[2];
+    var disks = process.argv[3];
     var board = populate(disks);
 
     //solve(board, disks, 0, 1, 2);
-    solveIter(board, disks);
+    if(process.argv[3] == "recurse"){
+        console.log("Running recursive algorithm...");
+        solve(board, disks);
+    }
+    else{
+        console.log("Running iterative algorithm...");
+        solveIter(board, disks);
+    }
+
     console.log(board);
 }
 main();
