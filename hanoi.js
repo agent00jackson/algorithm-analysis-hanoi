@@ -19,6 +19,7 @@ function move(board, source, dest){
     safePush(board, dest, popped);
 }
 
+//Recursive Solution
 function solve(board, n, source, aux, target){
     if(n > 1){
         solve(board, n-1, source, target, aux);
@@ -31,6 +32,7 @@ function solve(board, n, source, aux, target){
     }
 }
 
+//Iterative Solution
 function solveIter(board, n)
 {
     //each move is [n, src, targ, checked]
