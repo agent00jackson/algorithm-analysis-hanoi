@@ -33,22 +33,27 @@ function solve(board, n, source, aux, target){
 
 function solveIter(board, n)
 {
-    var src = 0;
-    var aux = 1;
-    var targ = 2;
-    var src_temp = 2;
-
-    while(board[2].length < n)
+    //each move is [n, src, targ, checked]
+    moveStack = [];
+    moveStack.push([n, 0, 1, 2, false]);
+    while(moveStack.length > 0)
     {
-        targ = src_temp;
-
-        move(board, src, aux);
-        move(board, src, targ);
-        move(board, aux, targ);
-
-        src_temp = src;
-        src = aux;
-        aux = targ;
+        curMove = moveStack.pop();
+        curN = curMove[0];
+        curSrc = curMove[1];
+        curAux = curMove[2];
+        curTarg = curMove[3];
+        curChecked = curMove[4];
+        if(curN === 1 || curChecked)
+        {
+            move(board, curSrc, curTarg);
+        }
+        else
+        {
+            moveStack.push([curN-1, curAux, curSrc, curTarg, false]);
+            moveStack.push([curN, curSrc, curAux, curTarg, true]);
+            moveStack.push([curN-1, curSrc, curTarg, curAux, false]);
+        }
     }
 }
 
@@ -68,7 +73,7 @@ function populate(n)
 }
 
 function main(){
-    var disks = 3;
+    var disks = 4;
     var board = populate(disks);
 
     //solve(board, disks, 0, 1, 2);
