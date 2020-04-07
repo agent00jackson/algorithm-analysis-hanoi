@@ -75,12 +75,11 @@ function populate(n)
 }
 
 function main(){
-    var disks = 4;
+    var disks = process.argv[2];
     var board = populate(disks);
 
     //solve(board, disks, 0, 1, 2);
     solveIter(board, disks);
     console.log(board);
 }
-
 main();
