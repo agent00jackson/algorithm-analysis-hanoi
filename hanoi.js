@@ -79,13 +79,17 @@ function main(){
     var board = populate(disks);
 
     //solve(board, disks, 0, 1, 2);
-    if(process.argv[3] == "recurse"){
+    if(process.argv[2] == "recurse"){
         console.log("Running recursive algorithm...");
-        solve(board, disks);
+        console.time(`Time for ${disks} disks recursively`);
+        solve(board, disks, 0, 1, 2);
+        console.timeEnd(`Time for ${disks} disks recursively`);
     }
     else{
         console.log("Running iterative algorithm...");
+        console.time(`Time for ${disks} disks iteratively`);
         solveIter(board, disks);
+        console.timeEnd(`Time for ${disks} disks iteratively`);
     }
 
     console.log(board);
